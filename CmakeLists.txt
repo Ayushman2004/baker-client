@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.10)
+
+project(BakerClient)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+add_executable(BakerClient main.cpp)
+
+include_directories(include)
+
+find_package(restclient-cpp REQUIRED)
+target_include_directories(BakerClient PRIVATE ${restclient-cpp_INCLUDE_DIRS})
+target_link_libraries(BakerClient ${restclient-cpp_LIBRARIES})
+
+find_package(nlohmann_json REQUIRED)
+target_link_libraries(BakerClient nlohmann_json::nlohmann_json)
