@@ -3,6 +3,9 @@
 #include "restclient-cpp/restclient.h"
 #include <nlohmann/json.hpp>
 
+std::string getpkginfo = "http://localhost:8080/get-pkg_info/"; 
+std::string downpkg = "http://localhost:8080/down-pkg/";
+
 int main(int argc, char* argv[])
 {
 	
@@ -12,7 +15,7 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
-	RestClient::Response r = RestClient::get("http://localhost:8080/get-pkg_info/"+ std::string(argv[2]));
+	RestClient::Response r = RestClient::get(getpkginfo + std::string(argv[2]));
 
 	auto json_response = nlohmann::json::parse(r.body);
 
@@ -41,7 +44,7 @@ int main(int argc, char* argv[])
 	for(const std::string& i:headerFiles)
 	{	
 		std::cout << "fetching " + i << std::endl;
-		RestClient::Response h = RestClient::get("http://localhost:8080/down-pkg/"+i);
+		RestClient::Response h = RestClient::get("downpkg"+i);
 		std::ofstream outFile("C:\\baker-client\\header\\"+i, std::ios::binary);
 		outFile.write(h.body.c_str(), h.body.size());
 		outFile.close();
@@ -53,7 +56,7 @@ int main(int argc, char* argv[])
 	for (const std::string& i : srcFiles)
 	{
 		std::cout << "fetching " + i << std::endl;
-		RestClient::Response h = RestClient::get("http://localhost:8080/down-pkg/" + i);
+		RestClient::Response h = RestClient::get("downpkg" + i);
 		std::ofstream outFile("C:\\baker-client\\src\\" + i, std::ios::binary);
 		outFile.write(h.body.c_str(), h.body.size());
 		outFile.close();
@@ -67,7 +70,7 @@ int main(int argc, char* argv[])
 	for (const std::string& i : binFiles)
 	{
 		std::cout << "fetching " + i << std::endl;
-		RestClient::Response h = RestClient::get("http://localhost:8080/down-pkg/" + i);
+		RestClient::Response h = RestClient::get("downpkg" + i);
 		std::ofstream outFile("C:\\baker-client\\bin\\" + i, std::ios::binary);
 		outFile.write(h.body.c_str(), h.body.size());
 		outFile.close();
@@ -82,7 +85,7 @@ int main(int argc, char* argv[])
 	{
 		std::string n = i.substr(3);
 		std::cout << "fetching " + n << std::endl;
-		RestClient::Response h = RestClient::get("http://localhost:8080/down-pkg/" + i);
+		RestClient::Response h = RestClient::get("downpkg" + i);
 		std::ofstream outFile("C:\\baker-client\\debug\\bin\\" + n, std::ios::binary);
 		outFile.write(h.body.c_str(), h.body.size());
 		outFile.close();
@@ -97,7 +100,7 @@ int main(int argc, char* argv[])
 	{
 		std::string n = i.substr(3);
 		std::cout << "fetching " + n << std::endl;
-		RestClient::Response h = RestClient::get("http://localhost:8080/down-pkg/" + i);
+		RestClient::Response h = RestClient::get("downpkg" + i);
 		std::ofstream outFile("C:\\baker-client\\debug\\lib\\" + n, std::ios::binary);
 		outFile.write(h.body.c_str(), h.body.size());
 		outFile.close();
