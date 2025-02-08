@@ -31,12 +31,12 @@ The Baker Client is a lightweight C++ tool designed to operate efficiently with 
 #### Build Instructions
 1. Clone the repository in the root dir:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Ayushman2004/baker-client.git
    cd baker-client
    ```
 
 2. Compile the client:
-   - vcpkg prefered for compilation
+   - vcpkg prefered for compiling `main.cpp`
 
 3. Run the client:
    ```bash
